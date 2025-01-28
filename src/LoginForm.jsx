@@ -1,9 +1,13 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import {  toast } from 'react-toastify';
+import { useLogin } from "../context/LoginContext";
+
 
 const LoginForm = () => {
+    const { login } = useLogin() 
     const navigate = useNavigate()
     const formik = useFormik({
         initialValues: {
@@ -19,9 +23,23 @@ const LoginForm = () => {
                 .required("Password is required."),
         }),
         onSubmit: (values) => {
-            navigate('/transactions')
+            // Simulate API call to check if email & password are correct
+            setTimeout(() => {
+                handleLogin(values)
+            }, 1000);
         },
     });
+
+    const handleLogin =  (values) => {
+        if (values.email === 'test@test.com' && values.password === 'password') {
+            toast.success('Login Successful')
+            login()
+            navigate('/transactions')
+        } else {
+            toast.error('Incorrect Email or Password')
+        }
+        formik.setSubmitting(false);
+    }
 
     return (
         <div className=" flex justify-center items-center h-screen flex-col w-full bg-gray-100 gap-8">
@@ -31,9 +49,8 @@ const LoginForm = () => {
                     onSubmit={formik.handleSubmit}
                     className="w-full max-w-md p-6 bg-white shadow-md rounded-lg"
                 >
-                    <h2 className="text-2xl font-bold text-center mb-6">BankIT Login Form</h2>
+                    <h2 className="text-xl font-bold text-center mb-6">BankIT Login Form</h2>
 
-                    {/* Email Field */}
                     <div className="mb-4">
                         <label htmlFor="email" className="block text-sm font-medium mb-1">
                             Email
@@ -50,7 +67,6 @@ const LoginForm = () => {
                         )}
                     </div>
 
-                    {/* Password Field */}
                     <div className="mb-4">
                         <label htmlFor="password" className="block text-sm font-medium mb-1">
                             Password
@@ -67,16 +83,27 @@ const LoginForm = () => {
                         )}
                     </div>
 
-                    {/* Submit Button */}
+
                     <button
                         type="submit"
+                        disabled={formik.isSubmitting}
                         className="w-full py-2 bg-blue-500 text-white font-medium rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     >
-                        Login
+                        {
+                            formik.isSubmitting ? (
+                                <span className="flex items-center justify-center">
+                                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                    </svg>
+                                </span>
+                            ) : (
+                                "Login"
+                            )
+                        }
                     </button>
                 </form>
             </div>
-            {/* <NavLink to="/transactions" className="text-blue-500 hover:underline">View Transactions</NavLink> */}
+            
         </div>
     );
 };
