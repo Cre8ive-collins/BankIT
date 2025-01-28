@@ -135,8 +135,14 @@ Ensure the following are installed on your system:
 If this is your first time setting up the project, run:
 ```bash
 npm install
+```
 Or if you're using Yarn
 
 ```bash
 yarn install
-
+```
+### 2. Run the Development Server
+```bash
+npm run dev
+```
+Open your browser and navigate to the URL displayed in the terminal (usually http://localhost:5173).
