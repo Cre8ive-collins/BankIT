@@ -105,7 +105,7 @@ Progressive Web Apps (PWAs) are web applications that use modern web technologie
 
 ## 1. Build a simple React form for online banking login
 
-The app is hosted [HERE](https://bankitfetest.web.app/) to view the login form.
+The app is hosted [Click HERE](https://bankitfetest.web.app/){:target="_blank"} to view the login form.
 
 To simulate a successful login, please use:
 - **Email**: `test@test.com`
@@ -116,3 +116,27 @@ Any credentials other than the one provided will result in a failed login attemp
 ## 2. Create a secure React component that displays a user's transaction history using dummy JSON data, ensuring proper accessibility and formatting.
 
 A successful login will redirect you to the Transactions page, as it is a protected page that requires authentication.
+A simple Redux state was used to manage user access 
+
+# To run the app
+
+## Prerequisites
+Ensure the following are installed on your system:
+- **Node.js** (LTS version recommended) – [Download Node.js](https://nodejs.org)
+- A package manager:
+  - **npm** (comes with Node.js)
+  - **yarn** or **pnpm** (optional)
+
+---
+
+## Installation and Setup
+
+### 1. Install Dependencies
+If this is your first time setting up the project, run:
+```bash
+npm install
+Or if you're using Yarn
+
+```bash
+yarn install
+
